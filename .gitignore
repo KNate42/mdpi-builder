@@ -1,8 +1,4 @@
 node_modules/
 data/
 .git-local/
-.agents/
-.codex/
-.env
-.DS_Store
 npm-debug.log*
