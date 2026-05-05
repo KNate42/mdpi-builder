@@ -1,80 +1,191 @@
 .mdpi-page {
+  --num-col-right: 13mm;
   font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
-  color: #111;
+  color: #000;
   background: #fff;
-  padding: 28px 32px;
-  border-radius: 6px;
   font-size: 11pt;
   line-height: 1.45;
+  padding: 18mm 16mm 16mm;
+  position: relative;
+}
+
+.mdpi-page .line-numbers {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+.mdpi-page .line-number {
+  position: absolute;
+  left: var(--num-col-right);
+  transform: translate(-100%, -50%);
+  font-family: "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 7.5pt;
+  line-height: 1;
+  color: #000;
+  white-space: nowrap;
+}
+
+.mdpi-page .page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12mm;
+  border-bottom: 1px solid #000;
+  padding-bottom: 3mm;
+  margin: 0 0 6mm;
+}
+.mdpi-page .mdpi-mark {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 900;
+  font-size: 14pt;
+  letter-spacing: 1px;
+  padding: 3px 10px;
+  border: 2px solid #000;
+  border-radius: 2px;
+}
+.mdpi-page .journal-mark {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-weight: 700;
+  font-size: 12pt;
+  color: #2c80b8;
+  text-align: right;
+}
+
+.mdpi-page .page-content {
+  display: grid;
+  grid-template-columns: 34mm 1fr;
+  gap: 6mm;
+  align-items: start;
+}
+
+.mdpi-page .left-rail {
+  font-size: 8pt;
+  line-height: 1.4;
+  color: #000;
+}
+.mdpi-page .left-rail .history div { margin: 0 0 0.6mm; }
+.mdpi-page .left-rail .history strong,
+.mdpi-page .left-rail .citation strong,
+.mdpi-page .left-rail .copyright strong {
+  font-weight: 700;
+}
+.mdpi-page .left-rail .citation,
+.mdpi-page .left-rail .copyright {
+  margin-top: 4mm;
+  font-size: 7.5pt;
+  line-height: 1.35;
+}
+
+.mdpi-page .article-main { min-width: 0; }
+
+.mdpi-page .article-type {
+  font-style: italic;
+  font-size: 11pt;
+  margin: 0 0 2mm;
 }
 .mdpi-page .doc-title {
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  font-size: 18pt;
+  font-family: "Palatino Linotype", Palatino, Georgia, serif;
   font-weight: 700;
-  text-align: center;
-  margin: 0 0 10px;
-  color: #003366;
+  font-size: 18pt;
+  color: #000;
+  text-align: left;
+  margin: 0 0 5mm;
+  line-height: 1.15;
 }
 .mdpi-page .authors {
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  text-align: center;
+  font-weight: 700;
+  margin: 0 0 1.5mm;
   font-size: 11pt;
-  margin: 0 0 4px;
+  text-align: left;
+  font-style: normal;
 }
 .mdpi-page .affiliations {
-  font-family: "Helvetica Neue", Arial, sans-serif;
-  text-align: center;
-  font-size: 9pt;
-  font-style: italic;
-  color: #444;
-  margin: 0 0 18px;
+  font-size: 8pt;
+  font-style: normal;
+  color: #000;
+  margin: 0 0 4mm;
+  padding-left: 6mm;
+  white-space: pre-wrap;
 }
+
 .mdpi-page .abstract-block {
-  border-top: 2px solid #003366;
-  border-bottom: 1px solid #003366;
-  padding: 8px 0;
-  margin: 8px 0 14px;
-  font-size: 10pt;
+  margin: 0 0 3mm;
+  padding: 0;
+  border: 0;
+  font-size: 11pt;
+  text-align: justify;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+  hyphens: auto;
 }
 .mdpi-page .abstract-block .label {
   font-weight: 700;
-  color: #003366;
-  margin-right: 6px;
+  margin-right: 4px;
 }
-.mdpi-page .keywords { font-size: 10pt; margin-bottom: 16px; }
-.mdpi-page .keywords .label { font-weight: 700; color: #003366; margin-right: 6px; }
+.mdpi-page .abstract-block p { text-indent: 0; margin: 0 0 2mm; }
+.mdpi-page .abstract-block p:first-child { display: inline; }
 
-.mdpi-page .body {
-  column-count: 2;
-  column-gap: 22px;
-  column-rule: 0;
+.mdpi-page .keywords {
+  font-size: 11pt;
   text-align: justify;
-  hyphens: auto;
-  overflow-wrap: anywhere;
-  word-break: break-word;
+  margin: 0 0 6mm;
 }
+.mdpi-page .keywords .label {
+  font-weight: 700;
+  margin-right: 4px;
+}
+
+.mdpi-page .body { /* single column, MDPI modern */ }
 .mdpi-page h2 {
-  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-family: "Palatino Linotype", Palatino, Georgia, serif;
+  font-weight: 700;
   font-size: 12pt;
-  color: #003366;
-  margin: 14px 0 6px;
-  break-after: avoid-column;
+  color: #000;
+  margin: 5mm 0 1.5mm;
+  break-after: avoid;
   break-inside: avoid;
   page-break-after: avoid;
 }
-.mdpi-page h2:first-child { margin-top: 0; }
+.mdpi-page h2:first-child { margin-top: 2mm; }
 .mdpi-page p {
-  margin: 0 0 8px;
-  text-indent: 1.2em;
+  margin: 0 0 1mm;
+  text-indent: 7mm;
+  text-align: justify;
   overflow-wrap: anywhere;
   word-break: break-word;
+  hyphens: auto;
 }
-.mdpi-page p:first-of-type { text-indent: 0; }
 .mdpi-page h2 + p { text-indent: 0; }
-.mdpi-page .references { column-span: all; border-top: 1px solid #ccc; padding-top: 8px; margin-top: 16px; }
-.mdpi-page .references h2 { color: #003366; }
-.mdpi-page .references ol { padding-left: 22px; margin: 0; font-size: 9.5pt; }
-.mdpi-page .references li { margin-bottom: 4px; line-height: 1.35; }
+.mdpi-page .body > p:first-child { text-indent: 0; }
+
+.mdpi-page .references {
+  margin-top: 6mm;
+  padding-top: 3mm;
+  border-top: 1px solid #ccc;
+}
+.mdpi-page .references h2 { color: #000; margin-top: 0; }
+.mdpi-page .references ol {
+  padding-left: 6mm;
+  margin: 0;
+  font-size: 9.5pt;
+}
+.mdpi-page .references li {
+  margin-bottom: 1mm;
+  line-height: 1.4;
+  text-indent: 0;
+}
+
+.mdpi-page .page-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 10mm;
+  padding-top: 2mm;
+  border-top: 1px solid #ccc;
+  font-size: 8.5pt;
+  color: #000;
+}
+.mdpi-page .page-footer a { color: #000; text-decoration: none; }
 
 .mdpi-page .lt-issue { background: #fde68a; border-bottom: 2px dotted #b45309; cursor: help; }
 .mdpi-page .lt-issue.lt-spelling { background: #fecaca; border-bottom-color: #b91c1c; }

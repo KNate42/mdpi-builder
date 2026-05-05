@@ -69,7 +69,7 @@ function splitParagraphs(text) {
 
 function renderPreview(target) {
   const root = target || $('preview');
-  const title = els.title.value || 'Untitled';
+  const title = els.title.value || 'Title';
   const authors = els.authors.value || '';
   const affiliations = els.affiliations.value || '';
   const abstractText = els.abstract.value || '';
@@ -96,16 +96,89 @@ function renderPreview(target) {
     ? `<div class="references"><h2>References</h2><ol>${refs.map((r) => `<li>${escapeHtml(r)}</li>`).join('')}</ol></div>`
     : '';
 
+  const year = new Date().getFullYear();
+
   root.innerHTML = `
-    <h1 class="doc-title">${escapeHtml(title)}</h1>
-    ${authors ? `<div class="authors">${escapeHtml(authors)}</div>` : ''}
-    ${affiliations ? `<div class="affiliations">${escapeHtml(affiliations)}</div>` : ''}
-    ${abstractText ? `<div class="abstract-block"><span class="label">Abstract:</span>${renderTextWithIssues('abstract', abstractText)}</div>` : ''}
-    ${keywords ? `<div class="keywords"><span class="label">Keywords:</span> ${escapeHtml(keywords)}</div>` : ''}
-    <div class="body">${sectionsHtml}</div>
-    ${refsHtml}
+    <div class="page-header">
+      <span class="mdpi-mark">MDPI</span>
+      <span class="journal-mark">journal</span>
+    </div>
+    <div class="page-content">
+      <aside class="left-rail">
+        <div class="history">
+          <div><strong>Received:</strong> date</div>
+          <div><strong>Revised:</strong> date</div>
+          <div><strong>Accepted:</strong> date</div>
+          <div><strong>Published:</strong> date</div>
+        </div>
+        <div class="citation"><strong>Citation:</strong> To be added by editorial staff during production.</div>
+        <div class="copyright"><strong>Copyright:</strong> &copy; ${year} by the authors. Submitted for possible open access publication under the terms and conditions of the Creative Commons Attribution (CC BY) license (https://creativecommons.org/licenses/by/4.0/).</div>
+      </aside>
+      <main class="article-main">
+        <div class="article-type">Article</div>
+        <h1 class="doc-title">${escapeHtml(title)}</h1>
+        ${authors ? `<div class="authors">${escapeHtml(authors)}</div>` : ''}
+        ${affiliations ? `<div class="affiliations">${escapeHtml(affiliations)}</div>` : ''}
+        ${abstractText ? `<div class="abstract-block"><span class="label">Abstract:</span>${renderTextWithIssues('abstract', abstractText)}</div>` : ''}
+        ${keywords ? `<div class="keywords"><span class="label">Keywords:</span> ${escapeHtml(keywords)}</div>` : ''}
+        <div class="body">${sectionsHtml}</div>
+        ${refsHtml}
+      </main>
+    </div>
+    <div class="page-footer">
+      <span>J. Name ${year}, 1, x</span>
+      <span>https://doi.org/10.3390/xxxxx</span>
+    </div>
+    <div class="line-numbers" aria-hidden="true"></div>
   `;
-  if (!target) updateDraftMeter();
+  if (!target) {
+    updateDraftMeter();
+    renderLineNumbers(root);
+  }
+}
+
+function renderLineNumbers(article) {
+  if (!article) return;
+  const layer = article.querySelector('.line-numbers');
+  const main = article.querySelector('.article-main');
+  if (!layer || !main) return;
+  layer.innerHTML = '';
+
+  const articleRect = article.getBoundingClientRect();
+  if (articleRect.width === 0) return;
+
+  const blocks = main.querySelectorAll(
+    '.article-type, .doc-title, .authors, .affiliations, ' +
+    '.abstract-block, .keywords, ' +
+    '.body h2, .body p, ' +
+    '.references h2, .references li'
+  );
+
+  const frag = document.createDocumentFragment();
+  let counter = 0;
+  for (const el of blocks) {
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const rects = Array.from(range.getClientRects());
+
+    const lineMids = [];
+    for (const r of rects) {
+      if (r.height < 1 || r.width < 1) continue;
+      const yMid = r.top + r.height / 2 - articleRect.top;
+      if (lineMids.some((t) => Math.abs(t - yMid) < 4)) continue;
+      lineMids.push(yMid);
+    }
+    lineMids.sort((a, b) => a - b);
+    for (const yMid of lineMids) {
+      counter++;
+      const num = document.createElement('span');
+      num.className = 'line-number';
+      num.textContent = String(counter);
+      num.style.top = yMid + 'px';
+      frag.appendChild(num);
+    }
+  }
+  layer.appendChild(frag);
 }
 
 function updateDraftMeter() {
@@ -383,6 +456,19 @@ function wire() {
     if (raw) restoreFrom(JSON.parse(raw));
   } catch {}
   renderPreview();
+
+  const preview = $('preview');
+  if (preview && 'ResizeObserver' in window) {
+    let raf = 0;
+    const ro = new ResizeObserver(() => {
+      cancelAnimationFrame(raf);
+      raf = requestAnimationFrame(() => renderLineNumbers(preview));
+    });
+    ro.observe(preview);
+  }
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(() => renderLineNumbers(preview));
+  }
 }
 
 document.addEventListener('DOMContentLoaded', wire);
