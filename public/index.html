@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MDPI Paper Builder</title>
+<link rel="stylesheet" href="styles.css" />
+<link rel="stylesheet" href="mdpi-preview.css" />
+</head>
+<body>
+<header class="topbar no-print">
+  <div class="brand">
+    <span class="brand-mark" aria-hidden="true">M</span>
+    <span>
+      <strong>MDPI Builder</strong>
+      <span class="muted">Manuscript workspace</span>
+    </span>
+  </div>
+  <div class="actions">
+    <div class="action-group">
+      <button id="btn-check" class="primary" type="button" title="Check grammar and spelling">Check text</button>
+      <button id="btn-fix-all" type="button" disabled title="Apply available suggestions">Apply all</button>
+    </div>
+    <div class="action-group">
+      <button id="btn-save" type="button">Save</button>
+      <button id="btn-load" type="button">Load</button>
+    </div>
+    <div class="action-group">
+      <button id="btn-export-pdf" type="button">PDF</button>
+      <button id="btn-export-docx" type="button">DOCX</button>
+      <button id="btn-export-bib" type="button">BibTeX</button>
+    </div>
+  </div>
+</header>
+
+<main class="layout no-print">
+  <section class="editor" aria-label="Editor">
+    <div class="panel-title">
+      <div>
+        <span class="eyebrow">Manuscript</span>
+        <h1>Paper details</h1>
+      </div>
+      <span id="draft-meter" class="pill">0 sections</span>
+    </div>
+
+    <div class="field">
+      <label for="title">Title</label>
+      <input id="title" name="title" placeholder="Article Title" />
+    </div>
+
+    <div class="field">
+      <label for="authors">Authors</label>
+      <input id="authors" name="authors" placeholder="John Doe 1, Jane Roe 2,*" />
+    </div>
+
+    <div class="field">
+      <label for="affiliations">Affiliations</label>
+      <textarea id="affiliations" rows="2" placeholder="1 Department, University, City, Country; 2 ..."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="abstract">Abstract</label>
+      <textarea id="abstract" rows="5" data-checkable placeholder="Background, methods, results, conclusions..."></textarea>
+    </div>
+
+    <div class="field">
+      <label for="keywords">Keywords <span class="muted">(comma-separated, 3–10)</span></label>
+      <input id="keywords" placeholder="keyword1; keyword2; keyword3" />
+    </div>
+
+    <details open><summary><span>1. Introduction</span></summary>
+      <textarea id="introduction" rows="8" data-checkable></textarea>
+    </details>
+
+    <details><summary><span>2. Materials and Methods</span></summary>
+      <textarea id="methods" rows="8" data-checkable></textarea>
+    </details>
+
+    <details><summary><span>3. Results</span></summary>
+      <textarea id="results" rows="8" data-checkable></textarea>
+    </details>
+
+    <details><summary><span>4. Discussion</span></summary>
+      <textarea id="discussion" rows="8" data-checkable></textarea>
+    </details>
+
+    <details><summary><span>5. Conclusions</span></summary>
+      <textarea id="conclusions" rows="6" data-checkable></textarea>
+    </details>
+
+    <details><summary><span>References <span class="muted">(one per line, MDPI style)</span></span></summary>
+      <textarea id="references" rows="8" placeholder="Author, A.B.; Author, C.D. Title of the article. Journal Name 2024, 12, 345–360. https://doi.org/..."></textarea>
+    </details>
+
+    <details><summary><span>BibTeX source <span class="muted">(optional, for export)</span></span></summary>
+      <textarea id="bibtex" rows="6" placeholder="@article{key2024,&#10;  author = {Author, A.B.},&#10;  title = {...},&#10;  year = {2024}&#10;}"></textarea>
+    </details>
+  </section>
+
+  <section class="preview-pane" aria-label="Preview">
+    <div class="preview-toolbar">
+      <div>
+        <span class="eyebrow">Preview</span>
+        <strong>MDPI layout</strong>
+      </div>
+      <span id="status" class="status"></span>
+    </div>
+    <article id="preview" class="mdpi-page"></article>
+  </section>
+</main>
+
+<aside id="issues-panel" class="issues-panel no-print" hidden>
+  <div class="issues-head">
+    <strong>Suggestions</strong>
+    <button id="btn-close-issues" type="button" aria-label="Close">x</button>
+  </div>
+  <div id="issues-list"></div>
+</aside>
+
+<dialog id="load-dialog" class="no-print">
+  <form method="dialog">
+    <h3>Saved papers</h3>
+    <ul id="saved-list"></ul>
+    <menu><button value="cancel">Close</button></menu>
+  </form>
+</dialog>
+
+<article id="print-article" class="mdpi-page print-only"></article>
+
+<script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "mdpi-builder",
+  "version": "1.0.0",
+  "description": "MDPI manuscript editor",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "docx": "^9.0.2",
+    "express": "^4.21.2"
+  }
+}

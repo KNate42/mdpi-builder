@@ -1,0 +1,71 @@
+.mdpi-page {
+  font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
+  color: #111;
+  background: #fff;
+  padding: 28px 32px;
+  border-radius: 6px;
+  font-size: 11pt;
+  line-height: 1.45;
+}
+.mdpi-page .doc-title {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 18pt;
+  font-weight: 700;
+  text-align: center;
+  margin: 0 0 10px;
+  color: #003366;
+}
+.mdpi-page .authors {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-align: center;
+  font-size: 11pt;
+  margin: 0 0 4px;
+}
+.mdpi-page .affiliations {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-align: center;
+  font-size: 9pt;
+  font-style: italic;
+  color: #444;
+  margin: 0 0 18px;
+}
+.mdpi-page .abstract-block {
+  border-top: 2px solid #003366;
+  border-bottom: 1px solid #003366;
+  padding: 8px 0;
+  margin: 8px 0 14px;
+  font-size: 10pt;
+}
+.mdpi-page .abstract-block .label {
+  font-weight: 700;
+  color: #003366;
+  margin-right: 6px;
+}
+.mdpi-page .keywords { font-size: 10pt; margin-bottom: 16px; }
+.mdpi-page .keywords .label { font-weight: 700; color: #003366; margin-right: 6px; }
+
+.mdpi-page .body { column-count: 2; column-gap: 22px; column-rule: 0; text-align: justify; }
+.mdpi-page h2 {
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  font-size: 12pt;
+  color: #003366;
+  margin: 14px 0 6px;
+  break-after: avoid;
+}
+.mdpi-page p { margin: 0 0 8px; text-indent: 1.2em; }
+.mdpi-page p:first-of-type { text-indent: 0; }
+.mdpi-page .references { column-span: all; border-top: 1px solid #ccc; padding-top: 8px; margin-top: 16px; }
+.mdpi-page .references h2 { color: #003366; }
+.mdpi-page .references ol { padding-left: 22px; margin: 0; font-size: 9.5pt; }
+.mdpi-page .references li { margin-bottom: 4px; line-height: 1.35; }
+
+.mdpi-page .lt-issue { background: #fde68a; border-bottom: 2px dotted #b45309; cursor: help; }
+.mdpi-page .lt-issue.lt-spelling { background: #fecaca; border-bottom-color: #b91c1c; }
+
+@media print {
+  @page { size: A4; margin: 18mm 16mm; }
+  body { background: #fff; }
+  .no-print { display: none !important; }
+  .print-only { display: block !important; }
+  .mdpi-page { box-shadow: none; padding: 0; border-radius: 0; }
+}
