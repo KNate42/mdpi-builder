@@ -44,16 +44,33 @@
 .mdpi-page .keywords { font-size: 10pt; margin-bottom: 16px; }
 .mdpi-page .keywords .label { font-weight: 700; color: #003366; margin-right: 6px; }
 
-.mdpi-page .body { column-count: 2; column-gap: 22px; column-rule: 0; text-align: justify; }
+.mdpi-page .body {
+  column-count: 2;
+  column-gap: 22px;
+  column-rule: 0;
+  text-align: justify;
+  hyphens: auto;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 .mdpi-page h2 {
   font-family: "Helvetica Neue", Arial, sans-serif;
   font-size: 12pt;
   color: #003366;
   margin: 14px 0 6px;
-  break-after: avoid;
+  break-after: avoid-column;
+  break-inside: avoid;
+  page-break-after: avoid;
 }
-.mdpi-page p { margin: 0 0 8px; text-indent: 1.2em; }
+.mdpi-page h2:first-child { margin-top: 0; }
+.mdpi-page p {
+  margin: 0 0 8px;
+  text-indent: 1.2em;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
 .mdpi-page p:first-of-type { text-indent: 0; }
+.mdpi-page h2 + p { text-indent: 0; }
 .mdpi-page .references { column-span: all; border-top: 1px solid #ccc; padding-top: 8px; margin-top: 16px; }
 .mdpi-page .references h2 { color: #003366; }
 .mdpi-page .references ol { padding-left: 22px; margin: 0; font-size: 9.5pt; }
