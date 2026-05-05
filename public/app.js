@@ -1,6 +1,7 @@
 const FIELDS = [
   'title', 'authors', 'affiliations', 'abstract', 'keywords',
   'introduction', 'methods', 'results', 'discussion', 'conclusions',
+  'received', 'revised', 'accepted', 'published', 'citation', 'copyright',
   'references', 'bibtex',
 ];
 const CHECKABLE = ['abstract', 'introduction', 'methods', 'results', 'discussion', 'conclusions'];
@@ -97,6 +98,13 @@ function renderPreview(target) {
     : '';
 
   const year = new Date().getFullYear();
+  const received = els.received.value.trim() || 'date';
+  const revised = els.revised.value.trim() || 'date';
+  const accepted = els.accepted.value.trim() || 'date';
+  const published = els.published.value.trim() || 'date';
+  const citationText = els.citation.value.trim() || 'To be added by editorial staff during production.';
+  const copyrightText = els.copyright.value.trim()
+    || `© ${year} by the authors. Submitted for possible open access publication under the terms and conditions of the Creative Commons Attribution (CC BY) license (https://creativecommons.org/licenses/by/4.0/).`;
 
   root.innerHTML = `
     <div class="page-header">
@@ -106,13 +114,13 @@ function renderPreview(target) {
     <div class="page-content">
       <aside class="left-rail">
         <div class="history">
-          <div><strong>Received:</strong> date</div>
-          <div><strong>Revised:</strong> date</div>
-          <div><strong>Accepted:</strong> date</div>
-          <div><strong>Published:</strong> date</div>
+          <div><strong>Received:</strong> ${escapeHtml(received)}</div>
+          <div><strong>Revised:</strong> ${escapeHtml(revised)}</div>
+          <div><strong>Accepted:</strong> ${escapeHtml(accepted)}</div>
+          <div><strong>Published:</strong> ${escapeHtml(published)}</div>
         </div>
-        <div class="citation"><strong>Citation:</strong> To be added by editorial staff during production.</div>
-        <div class="copyright"><strong>Copyright:</strong> &copy; ${year} by the authors. Submitted for possible open access publication under the terms and conditions of the Creative Commons Attribution (CC BY) license (https://creativecommons.org/licenses/by/4.0/).</div>
+        <div class="citation"><strong>Citation:</strong> ${escapeHtml(citationText)}</div>
+        <div class="copyright"><strong>Copyright:</strong> ${escapeHtml(copyrightText)}</div>
       </aside>
       <main class="article-main">
         <div class="article-type">Article</div>
