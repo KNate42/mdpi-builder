@@ -100,8 +100,8 @@ function renderPreview(target) {
 
   root.innerHTML = `
     <div class="page-header">
-      <span class="mdpi-mark">MDPI</span>
-      <span class="journal-mark">journal</span>
+      <span class="publisher-mark">Publisher</span>
+      <span class="journal-mark">Journal Name</span>
     </div>
     <div class="page-content">
       <aside class="left-rail">
@@ -344,7 +344,7 @@ async function exportDocx() {
     });
     if (!r.ok) throw new Error(`HTTP ${r.status}`);
     const blob = await r.blob();
-    downloadBlob(blob, (els.title.value || 'mdpi-paper').replace(/[^\w.-]+/g, '-') + '.docx');
+    downloadBlob(blob, (els.title.value || 'manuscript').replace(/[^\w.-]+/g, '-') + '.docx');
     setStatus('DOCX downloaded', 'ok');
   } catch (err) {
     setStatus('DOCX export failed: ' + err.message, 'error');
@@ -362,7 +362,7 @@ function exportBibtex() {
     content = refs.map((r, i) => `@misc{ref${i + 1},\n  note = {${escapeBib(r)}}\n}`).join('\n\n');
   }
   const blob = new Blob([content + '\n'], { type: 'application/x-bibtex;charset=utf-8' });
-  downloadBlob(blob, (els.title.value || 'mdpi-paper').replace(/[^\w.-]+/g, '-') + '.bib');
+  downloadBlob(blob, (els.title.value || 'manuscript').replace(/[^\w.-]+/g, '-') + '.bib');
   setStatus('BibTeX downloaded', 'ok');
 }
 

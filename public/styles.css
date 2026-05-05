@@ -545,6 +545,13 @@ dialog menu {
   display: none;
 }
 
+.legal {
+  padding: 8px 18px 14px;
+  color: var(--muted);
+  font-size: 11px;
+  text-align: center;
+}
+
 @media (max-width: 1120px) {
   .topbar {
     align-items: flex-start;

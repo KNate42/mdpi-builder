@@ -1,7 +1,7 @@
 {
-  "name": "mdpi-builder",
+  "name": "paper-builder",
   "version": "1.0.0",
-  "description": "MDPI manuscript editor",
+  "description": "Manuscript editor with a live single-column article preview",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

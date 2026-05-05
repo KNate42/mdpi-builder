@@ -3,16 +3,16 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>MDPI Paper Builder</title>
+<title>Paper Builder</title>
 <link rel="stylesheet" href="styles.css" />
 <link rel="stylesheet" href="mdpi-preview.css" />
 </head>
 <body>
 <header class="topbar no-print">
   <div class="brand">
-    <span class="brand-mark" aria-hidden="true">M</span>
+    <span class="brand-mark" aria-hidden="true">P</span>
     <span>
-      <strong>MDPI Builder</strong>
+      <strong>Paper Builder</strong>
       <span class="muted">Manuscript workspace</span>
     </span>
   </div>
@@ -88,7 +88,7 @@
       <textarea id="conclusions" rows="6" data-checkable></textarea>
     </details>
 
-    <details><summary><span>References <span class="muted">(one per line, MDPI style)</span></span></summary>
+    <details><summary><span>References <span class="muted">(one per line)</span></span></summary>
       <textarea id="references" rows="8" placeholder="Author, A.B.; Author, C.D. Title of the article. Journal Name 2024, 12, 345–360. https://doi.org/..."></textarea>
     </details>
 
@@ -101,7 +101,7 @@
     <div class="preview-toolbar">
       <div>
         <span class="eyebrow">Preview</span>
-        <strong>MDPI layout</strong>
+        <strong>Article layout</strong>
       </div>
       <span id="status" class="status"></span>
     </div>
@@ -126,6 +126,11 @@
 </dialog>
 
 <article id="print-article" class="mdpi-page print-only"></article>
+
+<footer class="legal no-print">
+  Independent open-source tool. Not affiliated with, endorsed by, or sponsored by MDPI AG.
+  Trademarks belong to their respective owners.
+</footer>
 
 <script src="app.js"></script>
 </body>

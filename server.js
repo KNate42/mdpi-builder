@@ -107,7 +107,7 @@ app.delete('/api/doc/:id', async (req, res) => {
 });
 
 app.listen(PORT, () => {
-  console.log(`MDPI Builder running at http://localhost:${PORT}`);
+  console.log(`Paper Builder running at http://localhost:${PORT}`);
 });
 
 function sanitizeFilename(s) {
@@ -208,7 +208,7 @@ async function buildDocx(doc) {
   }
 
   const document = new Document({
-    title: doc.title || 'MDPI Paper',
+    title: doc.title || 'Manuscript',
     sections: [{ properties: {}, children }],
   });
 
