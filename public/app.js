@@ -137,56 +137,8 @@ function renderPreview(target) {
       <span>J. Name ${year}, 1, x</span>
       <span>https://doi.org/10.3390/xxxxx</span>
     </div>
-    <div class="line-numbers" aria-hidden="true"></div>
   `;
-  if (!target) {
-    updateDraftMeter();
-    renderLineNumbers(root);
-  }
-}
-
-function renderLineNumbers(article) {
-  if (!article) return;
-  const layer = article.querySelector('.line-numbers');
-  const main = article.querySelector('.article-main');
-  if (!layer || !main) return;
-  layer.innerHTML = '';
-
-  const articleRect = article.getBoundingClientRect();
-  if (articleRect.width === 0) return;
-
-  const blocks = main.querySelectorAll(
-    '.article-type, .doc-title, .authors, .affiliations, ' +
-    '.abstract-block, .keywords, ' +
-    '.body h2, .body p, ' +
-    '.references h2, .references li'
-  );
-
-  const frag = document.createDocumentFragment();
-  let counter = 0;
-  for (const el of blocks) {
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    const rects = Array.from(range.getClientRects());
-
-    const lineMids = [];
-    for (const r of rects) {
-      if (r.height < 1 || r.width < 1) continue;
-      const yMid = r.top + r.height / 2 - articleRect.top;
-      if (lineMids.some((t) => Math.abs(t - yMid) < 4)) continue;
-      lineMids.push(yMid);
-    }
-    lineMids.sort((a, b) => a - b);
-    for (const yMid of lineMids) {
-      counter++;
-      const num = document.createElement('span');
-      num.className = 'line-number';
-      num.textContent = String(counter);
-      num.style.top = yMid + 'px';
-      frag.appendChild(num);
-    }
-  }
-  layer.appendChild(frag);
+  if (!target) updateDraftMeter();
 }
 
 function updateDraftMeter() {
@@ -464,19 +416,6 @@ function wire() {
     if (raw) restoreFrom(JSON.parse(raw));
   } catch {}
   renderPreview();
-
-  const preview = $('preview');
-  if (preview && 'ResizeObserver' in window) {
-    let raf = 0;
-    const ro = new ResizeObserver(() => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(() => renderLineNumbers(preview));
-    });
-    ro.observe(preview);
-  }
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(() => renderLineNumbers(preview));
-  }
 }
 
 document.addEventListener('DOMContentLoaded', wire);

@@ -1,5 +1,4 @@
 .mdpi-page {
-  --num-col-right: 13mm;
   font-family: "Palatino Linotype", Palatino, "Book Antiqua", Georgia, serif;
   color: #000;
   background: #fff;
@@ -7,22 +6,6 @@
   line-height: 1.45;
   padding: 18mm 16mm 16mm;
   position: relative;
-}
-
-.mdpi-page .line-numbers {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.mdpi-page .line-number {
-  position: absolute;
-  left: var(--num-col-right);
-  transform: translate(-100%, -50%);
-  font-family: "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: 7.5pt;
-  line-height: 1;
-  color: #000;
-  white-space: nowrap;
 }
 
 .mdpi-page .page-header {
